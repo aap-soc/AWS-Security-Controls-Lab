@@ -1,4 +1,4 @@
-### AWS-Security-Controls-Lab - Using AWS 
+### 🔐 AWS-Security-Controls-Lab - Using AWS 
 
 - **Focus**: Cloud Security | IAM | KMS | S3 Encryption
 - **Environment**: AWS Free Tier | Region: eu-west-2 (London)
