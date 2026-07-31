@@ -3,7 +3,7 @@
 - **Focus**: Cloud Security | IAM | KMS | S3 Encryption
 - **Environment**: AWS Free Tier | Region: eu-west-2 (London)
 - **Date**: July 2026
-- **Author**: Andre Patterson | LinkedIn | GitHub
+- **Author**: Andre Patterson 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -15,17 +15,17 @@ All labs were completed live in the AWS Management Console on a Free Tier accoun
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## 🗂️ Repo Structure
 
-
-
-
-
-
-
-
-
-
-
+aws-security-controls-lab/
+- │
+- ├── README.md                        ← Project overview
+- ├── docs/
+- │   └── lab-notes.md                 ← Step-by-step notes mirroring every screenshot
+- └── screenshots/
+-       ├── lab1-iam/                    ← 9 screenshots
+-       ├── lab2-kms/                    ← 9 screenshots
+-       └── lab3-s3-encyrption/           ← 9 screenshots
 
 
 
@@ -60,6 +60,8 @@ Controlling who can access what in AWS using least-privilege principles
 - Confirmed user created with correct group membership and policy inheritance
 
 
+
+
 **Key security concepts:**
 
 - Least privilege access control
@@ -86,6 +88,7 @@ Creating and managing a customer-managed encryption key
 - Confirmed key status: Enabled and ready for use across AWS services
 
 
+
 **Key security concepts**:
 - Symmetric vs asymmetric encryption keys
 - Customer-managed keys vs AWS-managed keys
@@ -108,6 +111,9 @@ Encrypted object storage using a customer-managed KMS key
 - Verified encryption via bucket Properties - SSE-KMS confirmed with correct KMS key ARN
 - Confirmed Bucket Key enabled  - reduces KMS API calls and cost
 
+
+
+
 **Key security concepts**:
 
 - S3 public access blocking
@@ -119,7 +125,7 @@ Encrypted object storage using a customer-managed KMS key
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# 🔧 Troubleshooting Log
+## 🔧 Troubleshooting Log
 
 
 |        **Lab**         |           **Issue**          |                        **Cause**                      |               Resolution                         |                               
@@ -130,8 +136,7 @@ Encrypted object storage using a customer-managed KMS key
         
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-# 📚 Key Security Concepts Demonstrated
+## 📚 Key Security Concepts Demonstrated
 
 - **Least privilege** - Security Audit policy gives read-only access, nothing more
 - **MFA enforcement** - root account protected with multi-factor authentication
@@ -139,3 +144,10 @@ Encrypted object storage using a customer-managed KMS key
 - **Customer-managed encryption keys** - full control over who can encrypt/decrypt
 - **Encryption at rest** - SSE-KMS applied to all objects in the S3 bucket
 - **Separation of duties** - key administrator and key user are distinct roles
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## 🔗 Related Projects
+
+- 🖥️ Virtualisation Lab - Ubuntu on VirtualBox (https://github.com/aap-soc/Virtualisation-Lab)
+- 🔐 Linux Security & Log Handling Portfolio (https://github.com/aap-soc/linux-security-portfolio)
