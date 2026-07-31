@@ -13,6 +13,20 @@ I present a mini hands-on AWS security lab completed as part of an active transi
 
 All labs were completed live in the AWS Management Console on a Free Tier account in the eu-west-2 (London) region. Every step is documented with screenshots as verifiable evidence of hands on configuration.
 
+
+**Evidence integrity**: The screenshots are taken from the completed console work and have been sanitised for a public GitHub repository. Account IDs, email addresses, ARNs, key IDs, bucket identifiers, sign-in information, IP addresses, and session identifiers are redacted.
+
+
+**Project objective**
+
+Build a small AWS security baseline that applies four core controls:
+
+1- Identity control through IAM users, groups, and an AWS-managed audit policy.
+
+2-Cryptographic control through a customer-managed symmetric KMS key.
+
+3- Data protection through a private S3 bucket using SSE-KMS encryption.
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🗂️ Repo Structure
