@@ -15,7 +15,7 @@
 **Step 1- IAM Dashboard (Root Account)**
 ![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/eaaf2b184a5723c8bf841e7ff3a7c800b9e2be25/screenshots/Lab%201-iam/lab1-MFA%2001.png)
 
-Opened the IAM dashboard as root user. The console immediately displayed security recommendations  - a warning that the root account has no MFA enabled and that IAM best practices are not yet applied.
+Opened the IAM dashboard as root user. The console immediately displayed security recommendations - a warning that the root account has no MFA enabled and that IAM best practices are not yet applied.
 
 **What this shows**:
 
@@ -163,3 +163,156 @@ User **andre-soc-analyst** confirmed created. Console shows:
 Lab 1 complete ✅
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Lab 2 - KMS (Key Management Service) {#lab-2}
+
+**Objective**: Create a customer-managed symmetric encryption key, assign administrators and users, and confirm the key is active.
+
+
+
+
+
+**Step 1- KMS Service Landing Page**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/01-search-kms-service.png)
+
+Navigated to AWS Key Management Service. KMS allows creation and management of cryptographic keys used to encrypt data across AWS services including S3, EBS, RDS, CloudTrail, and SSM Parameter Store.
+
+**Customer-managed vs AWS-managed keys**:
+- AWS-managed: AWS controls the key policy -  you cannot audit or restrict who uses them
+- Customer-managed: You define exactly who can administer and use the key - full auditability
+
+
+
+
+
+
+
+**Step 2- KMS Dashboard**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/02-start-create-key.png)
+
+Reviewed the KMS customer-managed keys dashboard, the central location where all lab encryption keys will be managed.
+
+
+
+
+
+
+
+**Step 3- Configure Key Type**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/03-configure-symmetric-key.png)
+
+Selected key configuration:
+
+|       **Setting**             |                 **Value**                    |                **Reason**                               |
+|-------------------------------|----------------------------------------------|---------------------------------------------------------|
+|Key type                       |                 Symmetric                    |   Same key for encrypt and decrypt — correct for S3     |
+|Key usage                      |             Encrypt and Decrypt              |   Required for S3 SSE-KMS and CloudTrail log encryption |
+
+
+
+
+
+
+
+**Step 4- Add Key Alias and Label**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/04-set-key-alias.png)
+
+Set the key alias and description:
+
+**Alias**: soc-lab-key
+Description: Customer-managed key for SOC security lab
+
+**Why aliases matter**: KMS key ARNs contain long strings. An alias makes the key human-readable and easy to reference when configuring S3, CloudTrail or SSM.
+
+
+
+
+
+
+
+**Step 5- Assign Key Administrators**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/05-select-key-administrator.png)
+
+Assigned **andre-soc-analyst** as key administrator.
+
+**Key administrator permissions**:
+
+- Can enable, disable, and schedule key deletion
+- Can update the key policy
+- Cannot use the key to encrypt or decrypt data by default
+
+Separation of duties: The person who manages the key is separate from the person who uses the key, this is a core security control in enterprise environments.
+
+
+
+
+
+
+
+**Step 6-Assign Key Users**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/06-select-key-user.png)
+
+Assigned **andre-soc-analyst** as key user.
+
+**Key user permissions**:
+
+- Can call **kms:Encrypt**, **kms:Decrypt**, **kms:ReEncrypt**, **kms:GenerateDataKey**, **kms:DescribeKey**
+- These permissions are required for S3 and CloudTrail to encrypt and decrypt objects using the key
+- In production: AWS service roles (S3, CloudTrail) would be assigned here, not IAM users
+
+
+
+
+
+
+**Step 7-Assign Key Users**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/aa0e63dc285f36ae4128aceb5f02d57b58cc0946/screenshots/Lab%202-kms/07-review-key-configuration.png)
+
+Verified the immutable key type, usage, alias, and permission selections via Key Configuration.
+
+
+
+
+
+
+
+**Step 8-Key Successfully Created and Listed**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/8531ffc3b487c7d977d729ec70ed1d99eb24effb/screenshots/Lab%202-kms/08-key-created-successfully.png)
+
+Key **soc-lab-key** confirmed in the KMS customer-managed keys list:
+
+Alias: soc-lab-key ✅
+Status: Enabled ✅
+Key type: Symmetric ✅
+Key Usage: Encrypt and Decrypt ✅
+
+
+
+
+
+
+
+**Step 9-Key Successfully Created and Listed**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/8531ffc3b487c7d977d729ec70ed1d99eb24effb/screenshots/Lab%202-kms/09-review-key-policy-clean.png)
+
+Reviewed the auto-generated key policy. The JSON policy explicitly defines:
+
+- Root account emergency access
+- Administrator actions (Create, Delete, Disable, Rotate)
+- User actions (**Encrypt**, **Decrypt**, **GenerateDataKey**, **DescribeKey**)
+
+SOC relevance: Key policies are audit artifacts,  they prove who had access to encrypted data and when. In an incident investigation, KMS CloudTrail logs show every encryption/decryption event.
+
+Lab 2 complete ✅
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
