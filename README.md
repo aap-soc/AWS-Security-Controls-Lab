@@ -43,7 +43,6 @@ All labs were completed live in the AWS Management Console on a Free Tier accoun
 |     **S3 + SSE-KMS**        |          Encrypted object storage            |            Prevents data exposure if storage is compromised                   |
 
 
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## ✅ Labs Completed
@@ -68,6 +67,7 @@ Controlling who can access what in AWS using least-privilege principles
 - MFA enforcement on privileged accounts
 - IAM user, group and policy structure
 
+  📁 **Screenshots → screenshots/lab1-iam/ 📄 Step-by-step notes → docs/lab-notes.md#lab-1**
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -92,6 +92,7 @@ Creating and managing a customer-managed encryption key
 - Key administrator vs key user separation of duties
 - Key policy structure in JSON
 
+📁 **Screenshots → screenshots/lab2-kms/ 📄 Step-by-step notes → docs/lab-notes.md#lab-2**
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -114,13 +115,27 @@ Encrypted object storage using a customer-managed KMS key
 - Customer-managed key vs AWS-managed key for S3
 - Verifying encryption configuration via bucket properties
 
+📁 **Screenshots → screenshots/lab3-s3-encryption/ 📄 Step-by-step notes → docs/lab-notes.md#lab-3**
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 🔧 Troubleshooting Log
+
+
+|        **Lab**         |           **Issue**          |                        **Cause**                      |               Resolution                         |                               
+|------------------------|------------------------------|-------------------------------------------------------|--------------------------------------------------|
+|          Lab 1         |     Group Creation failed    |   **SOC-Analysts** name contained invalid characters  |   Renamed to **SOC_Analysts** using underscore   |                       
+|                        |                              |                                                       |                                                  |
+                                                      
+        
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 # 📚 Key Security Concepts Demonstrated
 
-**Least privilege** - Security Audit policy gives read-only access, nothing more
-**MFA enforcement** - root account protected with multi-factor authentication
-**Group-based permissions** — policies attached to groups not individual users
-**Customer-managed encryption keys** - full control over who can encrypt/decrypt
-**Encryption at rest** - SSE-KMS applied to all objects in the S3 bucket
-**Separation of duties** - key administrator and key user are distinct roles
+- **Least privilege** - Security Audit policy gives read-only access, nothing more
+- **MFA enforcement** - root account protected with multi-factor authentication
+- **Group-based permissions** - policies attached to groups not individual users
+- **Customer-managed encryption keys** - full control over who can encrypt/decrypt
+- **Encryption at rest** - SSE-KMS applied to all objects in the S3 bucket
+- **Separation of duties** - key administrator and key user are distinct roles
