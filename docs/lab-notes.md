@@ -1,11 +1,11 @@
-## 📄 Lab Notes — AWS Security Controls Lab
+# 📄 Lab Notes — AWS Security Controls Lab
 
 - **Author**: Andre Patterson 
 - **Date**: July 2026 
 - **Environment**: AWS Free Tier | eu-west-2 (London)
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Lab 1 - IAM (Identity and Access Management) {#lab -1}
+### Lab 1 - IAM (Identity and Access Management) {#lab -1}
 
 **Objective**: Create a user, group, and apply least privilege permissions using AWS managed policies.
 
@@ -83,8 +83,83 @@ Created IAM user with the following user detail configurations:
 |User name                      |            **andre-soc-analyst**             |
 |AWS Management Console Access  |                  Enabled                     |
 |Password type                  |              Custom password                 | 
-|Require password reset         |                 Enabled                      |       
-
+|Require password reset         |                 Enabled                      |     
 
 
 **Why force password reset**: The initial password is set by the administrator. Forcing a reset on first login ensures the user sets their own credentials — the admin never needs to know the final password.
+
+
+
+
+
+
+
+
+**Step 6- Group Creation Error**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/05-group-name-validation-error.png)
+
+**Error encountered**:
+"User group was not created. The specified value for groupName is invalid. It must contain only alphanumeric characters and/or the following: +=,@_-"
+
+**Cause**: The group name SOC-Analysts triggered AWS character validation rules.
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/06-create-soc-analysts-group.png)
+**Fix**: Renamed to SOC_Analysts using an underscore.
+
+Learning point: AWS naming conventions vary by service and resource type. Always check character restrictions. This is a common real world mistake even for experienced engineers.
+
+
+
+
+
+
+
+**Step 7- Creating Group: SOC_Analysts with SecurityAudit Policy**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/06-create-soc-analysts-group.png)
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/07-group-created-securityaudit.png)
+
+Successfully created group **SOC_Analysts** and attached the **SecurityAudit** AWS managed policy.
+
+**Why SecurityAudit**:
+
+- Provides read-only access to security services: CloudTrail, IAM, Config, GuardDuty, S3 bucket policies, Security Hub
+- Mirrors what a real SOC analyst account looks like in a production environment
+- Analyst can view security data and investigate alerts but cannot modify configurations
+- Follows least-privilege: only grant access the role actually requires
+
+
+
+
+
+
+
+**Step 8- Review Before Creating**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/08-review-user-and-group.png)
+
+Reviewed the full user configuration summary before confirming:
+
+- Username: **andre-soc-analyst** ✅
+- Group: **SOC_Analysts** ✅
+- Policy inherited: **SecurityAudit** ✅
+
+
+
+
+
+
+
+**Step 9- User Created Successfully**
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/778f46d27150c2ded07f6e12c686b97930552cc8/screenshots/Lab%201-iam/09-user-created-successfully.png)
+
+User **andre-soc-analyst** confirmed created. Console shows:
+
+- User ARN
+- Sign-in URL for the account
+
+Lab 1 complete ✅
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
