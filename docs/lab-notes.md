@@ -316,3 +316,55 @@ Lab 2 complete ✅
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+### Lab 3 — S3 Bucket with Encryption {#lab-3}
+
+**Objective**: Create a private, encrypted S3 bucket using the **soc-lab-key** KMS key, upload a file and verify encryption is applied to all objects.
+
+
+
+
+**Step 1-S3 Service Overview**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/42e7e968f29dab2609e6fba463bf6b5a0338fa54/screenshots/Lab%203-s3-encryption/01-search-s3-service.png)
+
+Navigated to Amazon S3. S3 is the most widely used object storage service in AWS and one of the most frequently misconfigured. **Public** S3 buckets and **unencrypted** data have been responsible for some of the largest cloud data breaches in history.
+
+Common S3 misconfigurations that cause breaches:
+
+- Public read access left enabled on sensitive buckets
+- No default encryption - data stored in plaintext
+- No access logging - no audit trail of who accessed what
+
+
+
+
+
+
+
+**Step 2-Create Bucket Configuration**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/42e7e968f29dab2609e6fba463bf6b5a0338fa54/screenshots/Lab%203-s3-encryption/02-start-create-bucket.png)
+
+Created bucket with full security settings applied from the start:
+                                                                                                                                       
+
+|       **Setting**             |                 **Value**                    |                **Reason**                               |
+|-------------------------------|----------------------------------------------|---------------------------------------------------------|
+|Bucket name                    |       andre-soc-security --------- (private) |           Globally unique, descriptive                  |
+|Region                         |             eu-west-2 (London)               |          Data residency - keeps data in UK              |
+|Block all public access        |                 Enabled ✅                   |                                                         |
+|Default encryption             |                  SSE-KMS                     |     Encrypts every object automatically at rest         |
+| KMS key                       |              **soc-lab-key**                 |       Customer-managed - full key control               |
+
+**Why block public access at bucket level**: Even if an object-level ACL accidentally grants public access, the bucket-level block prevents it from taking effect.
+
+I have internationally shortened my bucket name displayed above for security posture.
+
+
+
+
+
+
+
+**Step 3-Bucket Created Successfully**
+![image alt]()
