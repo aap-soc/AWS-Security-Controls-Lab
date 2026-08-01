@@ -37,8 +37,8 @@ aws-security-controls-lab/
 - ├── docs/
 - │   └── lab-notes.md                 ← Step-by-step notes mirroring every screenshot
 - └── screenshots/
--       ├── lab1-iam/                    ← 9 screenshots
--       ├── lab2-kms/                    ← 9 screenshots
+-       ├── lab1-iam/                     ← 10 screenshots
+-       ├── lab2-kms/                     ← 9 screenshots
 -       └── lab3-s3-encyrption/           ← 9 screenshots
 
 
