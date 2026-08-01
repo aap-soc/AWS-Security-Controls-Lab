@@ -356,7 +356,6 @@ Created bucket with full security settings applied from the start:
 |Default encryption             |                  SSE-KMS                     |     Encrypts every object automatically at rest         |
 | KMS key                       |              **soc-lab-key**                 |       Customer-managed - full key control               |
 
-**Why block public access at bucket level**: Even if an object-level ACL accidentally grants public access, the bucket-level block prevents it from taking effect.
 
 I have internationally shortened my bucket name displayed above for security posture.
 
@@ -367,4 +366,91 @@ I have internationally shortened my bucket name displayed above for security pos
 
 
 **Step 3-Bucket Created Successfully**
-![image alt]()
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/03-bucket-created.png)
+
+Bucket appears in the S3 console. No public access indicator, the bucket is fully private.
+
+
+
+
+
+
+
+**Step 4-Upload File: andre-soc-analyst.txt**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/04-add-test-object.png)
+
+Uploaded test file **andre-soc-analyst.txt** to the encrypted bucket.
+
+**What occurs during upload**: Because SSE-KMS is set as default encryption, AWS automatically calls KMS to generate a data encryption key, encrypts the file before writing it to disk, and stores only the encrypted version. The plaintext data never touches S3 storage unencrypted.
+
+
+
+
+
+
+
+**Step 5-Bucket Properties and SSE-KMS Encryption Confirmed**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/06-encryption-arn-redacted.png)
+
+Navigated to the bucket Properties tab to verify encryption settings are applied at bucket level.
+
+In addition, Bucket Properties page confirms encryption is active:
+
+|       **Property**            |                      **Value**                             |
+|-------------------------------|------------------------------------------------------------|
+|Encryption type                |  Server-side encryption with AWS KMS keys (SSE-KMS) ✅     |
+|Bucket Key                     |                    Enabled                                 |
+
+
+
+
+
+
+
+**Step 6- txt file Upload Success**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/07-upload-succeeded.png)
+
+Upload confirmed - **andre-soc-analyst.txt** successfully stored in the encrypted bucket. The file is now at rest, encrypted with **soc-lab-key**.
+
+
+
+
+
+
+
+
+
+
+**Step 7- Confirmation of**
+
+![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/09-confirm-block-public-access.png)
+
+**Why block public access at bucket level**: Even if an object-level ACL accidentally grants public access, the bucket-level block prevents it from taking effect.
+
+Lab 3 complete ✅
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Troubleshooting Log
+
+**Issue 1 - IAM Group Name Invalid (Lab 1)**
+
+- **Error**: The specified value for **groupName** is invalid 
+- **Cause**: Group name contained characters outside the allowed set
+- **Fix**: Changed SOC-Analysts to **SOC_Analysts**
+- **Lesson**: Check AWS naming constraints before creating any resource as they differ by service
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Resources Created - Full Summary
+
+|       **Resource**            |                 **Name**                     |                **Purpose**                              |
+|-------------------------------|----------------------------------------------|---------------------------------------------------------|
+|IAM User                       |            andre-soc-security                |           Least-privilege SOC analyst account           |
+|IAM Group                      |               SOC_Analysts                   |        Group with **SecurityAudit** read-only policy    |
+|IAM Policy                     |           **SecurityAudit** (managed)        |           Read-only access to security services         |
+|KMS key                        |              **soc-lab-key**                 |     	    Customer-managed encryption key                |
