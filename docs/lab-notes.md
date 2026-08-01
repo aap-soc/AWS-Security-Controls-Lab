@@ -1,4 +1,4 @@
-# 📄 Lab Notes — AWS Security Controls Lab
+# 📄 Lab Notes - AWS Security Controls Lab
 
 - **Author**: Andre Patterson 
 - **Date**: July 2026 
