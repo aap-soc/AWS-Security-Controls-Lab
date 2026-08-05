@@ -15,13 +15,13 @@
 **Step 1- IAM Dashboard (Root Account)**
 ![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/eaaf2b184a5723c8bf841e7ff3a7c800b9e2be25/screenshots/Lab%201-iam/lab1-MFA%2001.png)
 
-Opened the IAM dashboard as root user. The console immediately displayed security recommendations - a warning that the root account has no MFA enabled and that IAM best practices are not yet applied.
+Opened the IAM dashboard as root user. The console immediately displayed security recommendations - a warning that the root account has no MFA enabled and that IAM best practices are not yet applied. I immediately enabled MFA as an extra layer of security. 
 
 **What this shows**:
 
 - Root account has unrestricted access to every AWS service and resource
 - AWS flags missing security controls on the dashboard automatically
-- This is the starting point — before any security controls are applied
+- This is the starting point - before any security controls are applied
 
 Security note: Root accounts should never be used for day-to-day tasks. They exist only for initial setup and emergency access.
 
