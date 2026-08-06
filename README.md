@@ -37,9 +37,10 @@ aws-security-controls-lab/
 - ├── docs/
 - │   └── lab-notes.md                 ← Step-by-step notes mirroring every screenshot
 - └── screenshots/
--       ├── lab1-iam/                     ← 10 screenshots
--       ├── lab2-kms/                     ← 9 screenshots
--       └── lab3-s3-encyrption/           ← 9 screenshots
+-       ├── lab1-iam/                          ← 10 screenshots
+-       ├── lab2-kms/                          ←  9 screenshots
+-       ├── lab3-s3-encyrption/                ←  9 screenshots
+-       └── lab 4- CloudTrail (Audit Logging)  ← 13 screenshots
 
 
 
@@ -138,7 +139,9 @@ Encrypted object storage using a customer-managed KMS key
 📁 **Screenshots → screenshots/lab3-s3-encryption/ 📄 Step-by-step notes → docs/lab-notes.md#lab-3**
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Lab 4 - CloudTrail (Audit Logging)
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 🔧 Troubleshooting Log
 
 
