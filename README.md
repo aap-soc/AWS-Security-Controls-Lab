@@ -56,6 +56,10 @@ aws-security-controls-lab/
 |          **KMS**            |     Creates and manages encryption keys      |          Protects data at rest across S3, EBS, RDS, CloudTrail                |
 |                             |                                              |                                                                               |
 |     **S3 + SSE-KMS**        |          Encrypted object storage            |            Prevents data exposure if storage is compromised                   |
+|                             |                                              |                                                                               |
+|      **CloudTrail**         |          Records every AWS API call          |            Primary SOC audit and forensics tool for incident investigation    |
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -173,11 +177,20 @@ Recording every AWS API call for SOC investigation and compliance
 |------------------------|------------------------------|-------------------------------------------------------|--------------------------------------------------|
 |          Lab 1         |     Group Creation failed    |   **SOC-Analysts** name contained invalid characters  |   Renamed to **SOC_Analysts** using underscore   |                       
 |                        |                              |                                                       |                                                  |
-|          Lab 4         |                              |                                                       |                                                  |
 
 
 
-        
+
+|     **Lab**      |           **Issue**                       |                        **Cause**                      |                       Resolution                                 |                               
+|------------------|-------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------|
+|      Lab 4       | **InsufficientEncryptionPolicyException** |    **soc_lab_key** KMS key policy did not include     | Navigated to KMS → edited soc_lab_key key policy → added          |                  |                                            cloudtrail.amazonaws.com as a service principal- IAM     CloudTrail service principal with kms:GenerateDataKey*          
+|                  |                                           | permissions alone are insufficient to grant a service | and kms:DescribeKey permissions → recreated trail successfully   
+                                                                       
+                                                                      
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 📚 Key Security Concepts Demonstrated
@@ -187,7 +200,9 @@ Recording every AWS API call for SOC investigation and compliance
 - **Group-based permissions** - policies attached to groups not individual users
 - **Customer-managed encryption keys** - full control over who can encrypt/decrypt
 - **Encryption at rest** - SSE-KMS applied to all objects in the S3 bucket
-- **Separation of duties** - key administrator and key user are distinct roles
+- **Separation of duties** - key administrator and key user are distinct role
+- **Audit logging** - every AWS API call recorded via CloudTrail with tamper-evident validation
+- **KMS service principals** - AWS services require explicit key policy authorisation separate from IAM
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
