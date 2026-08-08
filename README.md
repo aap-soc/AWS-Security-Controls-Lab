@@ -140,6 +140,30 @@ Encrypted object storage using a customer-managed KMS key
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Lab 4 - CloudTrail (Audit Logging)
+Recording every AWS API call for SOC investigation and compliance
+
+**What I configured**:
+
+- Navigated to CloudTrail and reviewed service capabilities to Capture, Store and Monitor
+- Configured trail **soc-audit-trail-2** with dedicated log storage bucket **andre-cloudtrail-logs2**
+- Enabled Log file SSE-KMS encryption using **soc_lab_key** — encrypting all audit logs at rest
+- Enabled Log file validation - generates cryptographic digest files for tamper detection
+- Configured management events: All API activity (Read + Write) with KMS events included
+- Confirmed trail status: 🟢 Logging - active and recording all AWS management API calls
+- Encountered and resolved a real **InsufficientEncryptionPolicyException** error (see troubleshooting log below)
+
+
+**Key security concepts**:
+
+- CloudTrail as the primary SOC audit and forensics tool in AWS
+- KMS key policy vs IAM policy separation - ensure services have explicit key policy permissions
+- Service principals in KMS — **cloudtrail.amazonaws.com** must be explicitly authorised
+- Log file validation for cryptographic tamper evidence (required by PCI DSS Requirement 10)
+- SSE-KMS for audit logs - only authorised principals can read encrypted log data
+- Multi-region trail — prevents audit blind spots across all AWS regions
+- Least privilege for CloudTrail — granting only kms:GenerateDataKey* and kms:DescribeKey
+
+📁 Screenshots → screenshots/lab4-cloudtrail/ 📄 Step-by-step notes → docs/lab4-cloudtrail-notes.md
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 🔧 Troubleshooting Log
@@ -149,7 +173,10 @@ Encrypted object storage using a customer-managed KMS key
 |------------------------|------------------------------|-------------------------------------------------------|--------------------------------------------------|
 |          Lab 1         |     Group Creation failed    |   **SOC-Analysts** name contained invalid characters  |   Renamed to **SOC_Analysts** using underscore   |                       
 |                        |                              |                                                       |                                                  |
-                                                      
+|          Lab 4         |                              |                                                       |                                                  |
+
+
+
         
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
