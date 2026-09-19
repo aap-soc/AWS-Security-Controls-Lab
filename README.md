@@ -57,7 +57,7 @@ aws-security-controls-lab/
 |                             |                                              |                                                                               |
 |     **S3 + SSE-KMS**        |          Encrypted object storage            |            Prevents data exposure if storage is compromised                   |
 |                             |                                              |                                                                               |
-|      **CloudTrail**         |          Records every AWS API call          |            Primary SOC audit and forensics tool for incident investigation    |
+|      **CloudTrail**         |          Records every AWS API call          |         Primary SOC audit and forensics tool for incident investigation       |
 
 
 
