@@ -366,9 +366,7 @@ I have internationally shortened my bucket name displayed above for security pos
 
 
 **Step 3-Bucket Created Successfully**
-
-![image alt](https://github.com/aap-soc/AWS-Security-Controls-Lab/blob/ce348b338fe0266fd1495b37b90a0388117240bf/screenshots/Lab%203-s3-encryption/03-bucket-created.png)
-
+![S3 bucket created, name redacted](../screenshots/Lab%203-s3-encryption/03-bucket-created-.png)
 Bucket appears in the S3 console. No public access indicator, the bucket is fully private.
 
 
