@@ -123,7 +123,7 @@ Creating and managing a customer-managed encryption key
 Encrypted object storage using a customer-managed KMS key
 
 **What I configured:**
-- Created S3 bucket
+- Created S3 bucket :andre-soc-security-lab1-[account-id]-eu-west-2
 - Blocked all public access on the bucket
 - Enabled default encryption: SSE-KMS using **soc-lab-key** from Lab 2
 - Uploaded test file: **andre-soc-analyst.txt**
